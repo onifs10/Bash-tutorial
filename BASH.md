@@ -1,6 +1,7 @@
 
 >[!note] Resources
 > [Bash Manual](https://www.gnu.org/software/bash/manual/bash.html)
+> [Shell built in commands](https://www.gnu.org/software/bash/manual/bash.html#index-_003a)
 ## **What is Bash?**
 
 - Bash (Bourne Again SHell) is a command language interpreter for Unix and Unix-like operating systems.
@@ -11,7 +12,7 @@
 
 >[!important] Most useful command in BASH
 > **man**  <command> - this command is used to load the manual for any command  
-#### Other Commands
+### Other Commands
 1. **ls**: List directory contents
     - Example: `ls`, `ls -l`, `ls -a`
 2. **cd**: Change directory
@@ -203,9 +204,90 @@ greet() {
 }
 greet "Alice"
 
+# you can also use the function keyword
+function print_hell(){
+	echo "Hello World"
+}
+
+# using return 
+function add(){
+  return (( $1 + $2 ))
+}
+
+add 1 2
+echo $? # printing the result from the function
+
 # Arguments are passed to a function using special vaiables
 ``` 
 
+
+### Arithmetic Expression
+Arithmetic operations in Bash scripting allow you to perform mathematical calculations within your scripts. Bash provides several ways to perform arithmetic operations, including built-in arithmetic expressions, the `expr` command, and arithmetic expansion using `$((...))`. Here's an overview of each method:
+#### **Arithmetic Expansion with `$((...))`:**
+
+- Bash supports arithmetic expansion by enclosing the expression within `$((...))`.
+- You can perform addition, subtraction, multiplication, division, and modulus operations using this method.
+```bash
+# Addition
+result=$((5 + 3))  # result = 8
+
+# Subtraction
+result=$((10 - 4))  # result = 6
+
+# Multiplication
+result=$((3 * 6))  # result = 18
+
+# Division
+result=$((20 / 4))  # result = 5
+
+# Modulus
+result=$((10 % 3))  # result = 1
+```
+
+#### **Using `let` for Arithmetic Operations:**
+
+- The `let` command allows you to perform arithmetic operations within a script.
+- It is particularly useful when you need to update the value of a variable based on an arithmetic expression.
+```bash
+# Addition
+let "result = 5 + 3"  # result = 8
+
+# Subtraction
+let "result = result - 2"  # result = 6
+
+# Multiplication
+let "result *= 2"  # result = 12
+
+# Division
+let "result /= 3"  # result = 4
+
+# Modulus
+let "result %= 3"  # result = 1
+
+```
+
+#### **Using `expr` Command:**
+
+- The `expr` command evaluates expressions and performs arithmetic operations.
+- It is useful when you need to perform arithmetic operations within a shell script and capture the result.
+
+```bash
+# Addition
+result=$(expr 5 + 3)  # result = 8
+
+# Subtraction
+result=$(expr $result - 2)  # result = 6
+
+# Multiplication
+result=$(expr $result \* 2)  # result = 12
+
+# Division
+result=$(expr $result / 3)  # result = 4
+
+# Modulus
+result=$(expr $result % 3)  # result = 1
+
+```
 ### Redirects and pipes
 1. **Output Redirection (`>` and `>>`):**
     - `>`: Redirects standard output (stdout) of a command to a file. If the file doesn't exist, it creates a new one. If the file exists, it overwrites its contents.
@@ -321,6 +403,7 @@ function say_goodbye() {
 say_goodbye
 
 ```
+
 
 ## Debug and troubleshoot bash Script
 ### Set the `set -x` option
